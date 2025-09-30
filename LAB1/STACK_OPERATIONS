@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 
 int stack[10];
