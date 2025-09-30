@@ -1,0 +1,92 @@
+// Sample output at the end
+
+#include <stdio.h>
+
+int stack[10];
+int n = 10;
+int top = -1;
+
+void push(int x)
+{
+    if (top >= n - 1)
+    {
+        printf("Stack overflow \n");
+        return;
+    }
+    top = top + 1;
+    stack[top] = x;
+    printf("%d pushed \n", x);
+}
+
+int pop()
+{
+    int z;
+    if (top == -1)
+    {
+        printf("Stack underflow \n");
+        return;
+    }
+    z = stack[top];
+    top = top - 1;
+    printf("%d popped \n", z);
+    return z;
+}
+
+void display()
+{
+    int i;
+    if (top == -1)
+    {
+        printf("Elements in stack is empty \n");
+        return;
+    }
+    printf("Elements in the stack are: \n");
+    for (i = top; i >= 0; i--)
+    {
+        printf("%d \n", stack[i]);
+    }
+}
+
+int main()
+{
+    int choice, x;
+    while (1)
+    {
+        printf("\n\n-- Stack Menu --\n");
+        printf("1. PUSH \n");
+        printf("2. POP \n");
+        printf("3. DISPLAY \n");
+        printf("4. Exit \n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice)
+        {
+        case 1:
+            printf("Enter push data: ");
+            scanf("%d", &x);
+            push(x);
+            break;
+
+        case 2:
+            pop();
+            break;
+
+        case 3:
+            display();
+            break;
+
+        case 4:
+            printf("Exiting the program \n");
+            return 0; // Using return 0 instead of break/exit(0)
+
+        default:
+            printf("Invalid choice, Try again \n");
+        }
+    }
+    return 0;
+}
+
+
+
+
