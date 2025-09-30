@@ -1,13 +1,17 @@
+// Output attached at the end of the code
 
 #include <stdio.h>
+
 #define MAX 100
 
 char stack[MAX];
+
 int top = -1;
 
-void push(char c)
-{
+void push(char c) {
+
     if (top >= (MAX - 1))
+    
     {
         printf("Stack overflow \n");
         return;
@@ -16,9 +20,9 @@ void push(char c)
     stack[top] = c;
 }
 
-char pop()
-{
-    char c;
+char pop() {
+
+    char c;    
     if (top == -1)
     {
         return '0';
@@ -28,8 +32,8 @@ char pop()
     return c;
 }
 
-char peek()
-{
+char peek() {
+
     if (top >= 0)
     {
         return stack[top];
@@ -40,8 +44,8 @@ char peek()
     }
 }
 
-int precedence(char c)
-{
+int precedence(char c) {
+
     if (c == '^')
     {
         return 3;
@@ -60,8 +64,8 @@ int precedence(char c)
     }
 }
 
-int isOperand(char c)
-{
+int isOperand(char c) {
+
     if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9'))
     {
         return 1;
@@ -72,8 +76,8 @@ int isOperand(char c)
     }
 }
 
-void infixToPostfix(char infix[], char postfix[])
-{
+void infixToPostfix(char infix[], char postfix[]) {
+
     int i = 0;
     int k = 0;
     char c;
@@ -120,8 +124,8 @@ void infixToPostfix(char infix[], char postfix[])
     postfix[k] = '\0';
 }
 
-int main()
-{
+int main() {
+
     char infix[MAX], postfix[MAX];
 
     printf("Enter infix expression: ");
@@ -134,6 +138,7 @@ int main()
     return 0;
 }
 
+// Output
 
 ![DSLAB2_OUTPUT](DSLAB2_OUTPUT.png)
 
