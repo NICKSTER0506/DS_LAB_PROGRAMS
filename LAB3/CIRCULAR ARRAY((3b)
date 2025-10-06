@@ -1,0 +1,84 @@
+#include <stdio.h>
+#define size 3
+
+int queue[size];
+int front = -1, rear = -1;
+
+void insert(int value) {
+    if ((front == 0 && rear == size - 1) || (rear + 1 == front)) {
+        printf("Queue Overflow! Cannot insert %d\n", value);
+        return;
+    }
+
+    if (front == -1) {
+        front = rear = 0;
+    } else if (rear == size - 1 && front != 0) {
+        rear = 0;
+    } else {
+        rear++;
+    }
+
+    queue[rear] = value;
+    printf("%d inserted into circular queue\n", value);
+}
+
+void delete() {
+    if (front == -1) {
+        printf("Queue Underflow! No elements to delete\n");
+        return;
+    }
+
+    printf("%d deleted from circular queue\n", queue[front]);
+
+    if (front == rear) {
+        front = rear = -1;
+    } else if (front == size - 1) {
+        front = 0;
+    } else {
+        front++;
+    }
+}
+
+void display() {
+    if (front == -1) {
+        printf("Circular queue is empty\n");
+        return;
+    }
+
+    printf("Circular queue elements: ");
+    int i = front;
+    while (1) {
+        printf("%d ", queue[i]);
+        if (i == rear)
+            break;
+        i = (i + 1) % size;
+    }
+    printf("\n");
+}
+
+int main() {
+    int choice, value;
+
+    while (1) {
+        printf("\n1. Insert\n2. Delete\n3. Display\n4. Exit\nEnter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                printf("Enter value to insert: ");
+                scanf("%d", &value);
+                insert(value);
+                break;
+            case 2:
+                delete();
+                break;
+            case 3:
+                display();
+                break;
+            case 4:
+                return 0;
+            default:
+                printf("Invalid choice!\n");
+        }
+    }
+}
