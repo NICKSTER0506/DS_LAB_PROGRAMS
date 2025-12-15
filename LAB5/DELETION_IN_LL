@@ -1,0 +1,104 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node {
+    int data;
+    struct node *next;
+};
+
+struct node *head = NULL;
+
+void createList() {
+    int n, x;
+    struct node *temp = NULL, *newNode;
+
+    printf("Enter number of nodes: ");
+    scanf("%d", &n);
+
+    for (int i = 1; i <= n; i++) {
+        printf("Enter data for node %d: ", i);
+        scanf("%d", &x);
+
+        newNode = (struct node*)malloc(sizeof(struct node));
+        newNode->data = x;
+        newNode->next = NULL;
+
+        if (head == NULL) {
+            head = temp = newNode;
+        } else {
+            temp->next = newNode;
+            temp = newNode;
+        }
+    }
+}
+
+void deleteFirst() {
+    if (head == NULL) {
+        printf("List is empty\n");
+        return;
+    }
+    struct node *temp = head;
+    head = head->next;
+    free(temp);
+    printf("First element deleted.\n");
+}
+
+void deleteLast() {
+    struct node *temp = head, *prev = NULL;
+
+    if (head == NULL) {
+        printf("List is empty\n");
+        return;
+    }
+    if (head->next == NULL) {
+        free(head);
+        head = NULL;
+        printf("Last element deleted.\n");
+        return;
+    }
+    while (temp->next != NULL) {
+        prev = temp;
+        temp = temp->next;
+    }
+    prev->next = NULL;
+    free(temp);
+    printf("Last element deleted.\n");
+}
+
+void deleteSpecific() {
+    int key;
+    struct node *temp = head, *prev = NULL;
+
+    printf("Enter element to delete: ");
+    scanf("%d", &key);
+
+    if (head == NULL) {
+        printf("List is empty\n");
+        return;
+    }
+    if (head->data == key) {
+        deleteFirst();
+        return;
+    }
+    while (temp != NULL && temp->data != key) {
+        prev = temp;
+        temp = temp->next;
+    }
+    if (temp == NULL) {
+        printf("Element not found\n");
+        return;
+    }
+    prev->next = temp->next;
+    free(temp);
+    printf("Element %d deleted.\n", key);
+}
+
+void display() {
+    struct node *temp = head;
+    if (head == NULL) {
+        printf("Linked List: NULL\n");
+        return;
+    }
+    printf("Linked List: ");
+    while (temp != NULL) {
+        printf("%d -> ", temp->data);
